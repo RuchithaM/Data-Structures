@@ -180,6 +180,23 @@ class linklist
             }
             cout<<"List deleted: Releasing memory"<<endl;
         }*/
+        
+        int at(int pos)
+        {
+            node* temp=head;
+            for(int i=0;i<pos;i++) temp=temp->link;
+            return temp->data;
+        }
+
+        void reverse_2() 
+        {
+            for(int i=size-1;i>=size/2;i--)
+            {
+                int temp=at((size-1) - i); //1st position
+                replace((size-1)-i,this->at(i));
+                replace(i,temp);
+            }
+        }
 
         void display()
         {   if(size==0) cout<<"No element found"<<endl;
@@ -187,7 +204,8 @@ class linklist
             {   node* ptr =head;
                 for(int i=0;i<size;i++)
                 {
-                    cout<<ptr->data<<endl;
+                    cout<<ptr->data;
+                    if(ptr->link!=NULL) cout<<"-->";
                     ptr=ptr->link;
                 }
                 cout<<endl;
@@ -197,25 +215,16 @@ class linklist
 int main()
 {
     linklist o;
+    for(int i=0;i<8;i++) o.push_front(i);
+    for(int i=0;i<8;i++) o.push_back(i);
     o.display();
-    o.push_front(10);
+    for(int i=0;i<10;i++)
+    {
+        o.replace(i,(o.at(i)+1));
+    }
     o.display();
-    o.push_front(60);
+    o.reverse_2();
     o.display();
-    o.push_back(88);
-    o.display();
-    o.insert_at(1,155);
-    o.display();
-    o.pop_front();
-    o.display();
-    o.pop_last();
-    o.display();
-    o.replace(0,12);
-    o.display();
-    o.reverse_linklist();
-    o.display();
-    o.display_reverse(o.head);
-    o.delete_linklist();
-    o.display();
+    
     return 0;
 }
