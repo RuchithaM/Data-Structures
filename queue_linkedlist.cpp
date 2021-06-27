@@ -48,7 +48,8 @@ class queue
     }
     void dequeue()
     { size--;
-        if(!isempty())
+        if(front==rear) {front=rear=NULL;}
+        else if(!isempty())
         {
             node *temp=front;
             front=front->next;
